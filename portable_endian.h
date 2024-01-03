@@ -19,6 +19,22 @@
 
 #if defined(__linux__) || defined(__CYGWIN__)
 
+#ifdef _ENDIAN_H
+#undef _ENDIAN_H
+#endif
+
+#ifdef __USE_MISC
+#warning "__USE_MISC is defined"
+#else
+#define __USE_MISC
+#endif
+
+#ifndef _ASSEMBLER_
+#warning "_ASSEMBLER_ is not defined"
+#else
+#undef _ASSEMBLER_
+#endif
+
 #	include <endian.h>
 
 #elif defined(__APPLE__)
@@ -65,9 +81,7 @@
 #elif defined(__WINDOWS__)
 
 #	include <winsock2.h>
-#ifdef __MINGW32__
 #	include <sys/param.h>
-#endif
 
 #	if BYTE_ORDER == LITTLE_ENDIAN
 
